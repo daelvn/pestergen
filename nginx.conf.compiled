@@ -1,0 +1,53 @@
+env LAPIS_ENVIRONMENT=development;
+worker_processes 1;
+error_log stderr notice;
+daemon off;
+pid logs/nginx.pid;
+
+events {
+  worker_connections 1024;
+}
+
+http {
+  include mime.types;
+
+  lua_shared_dict page_cache 15m;
+
+  init_by_lua_block {
+    require "socket"
+    require "lpeg"
+    require "lfs"
+    require "lsqlite3"
+
+    local grasp             = require "grasp.util"
+    expect, typeof, typeset = grasp.expect, grasp.typeof, grasp.typeset
+
+    log     = function(txt) ngx.log(ngx.NOTICE, txt) end
+    inspect = require "inspect"
+    fs      = require "filekit"
+  }
+
+  server {
+    listen 8080;
+    lua_code_cache off;
+
+    location / {
+      default_type text/html;
+      content_by_lua_block {
+        require("lapis").serve("app")
+      }
+    }
+
+    location /static/ {
+      alias static/;
+    }
+
+    location /fend/ {
+      alias node_modules/;
+    }
+
+    location /favicon.ico {
+      alias static/favicon.ico;
+    }
+  }
+}
