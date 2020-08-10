@@ -3,7 +3,7 @@ config = require "lapis.config"
 config {"development", "production"}, ->
   bind_host    "0.0.0.0"
   session_name "pestergen_session"
-  port          8080
+  port          6562
 
   pestergen ->
     db ->
