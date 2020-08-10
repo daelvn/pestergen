@@ -25,7 +25,8 @@ tasks:
   clean: =>
     print style "%{blue}:%{white} Cleaning files"
     for file in wildcard "**.lua"
-      fs.delete file
+      unless file\match "homepage.lua"
+        fs.delete file
     for dir in wildcard "*_temp"
       fs.delete dir
     --fs.delete "pestergen.db"

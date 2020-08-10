@@ -28,6 +28,17 @@ statements = {
     type:   "TEXT"
     nextid: "TEXT"
     islog:  "INTEGER"
+  
+  sql -> 
+    replace into "logs", -> 
+      values:
+        nid:    "homepage"
+        title:  "Welcome!"
+        next:   ""
+        panel:  "/static/panels/homepage/homegif.gif"
+        type:   "image/gif"
+        nextid: ""
+        islog:  0
 }
 
 for statement in *statements

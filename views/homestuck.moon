@@ -68,4 +68,4 @@ $(document).ready(function() {
             div class: "float-r disp-n disp-bl--sm", -> img src: "https://homestuck.com/assets/footer_logo-a913b68f0efbaed8da48bc0a4f22b35d369f40d0e4db132013acbe6f26b3e37f.gif"
             ul ->
               li -> a href: "/", "Homepage"
-            div -> span "made by daelvn. kindly hosted by ahti.space."
+            div -> span "made by daelvn and pancakes. kindly hosted by ahti.space."
