@@ -12,7 +12,7 @@ class App extends lapis.Application
   --   @include "applications.#{app}"
   -- routes
   "/": =>
-    render: "home"
+    redirect_to: "/view/homepage"
   "/list": =>
     redirect_to: "/list/0"
   "/list/:page": =>

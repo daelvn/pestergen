@@ -8,3 +8,5 @@ static/panels
 *.db
 *.db.*
 *.lua
+!static/panels/homepage/homegif.gif
+!static/logs/homepage.lua
