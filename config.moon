@@ -10,6 +10,7 @@ config {"development", "production"}, ->
     db ->
       backend  "grasp"
       location "pestergen.db"
+      perpage  10
     apps { "app" }
 
 config "production", ->

@@ -28,7 +28,7 @@ tasks:
       fs.delete file
     for dir in wildcard "*_temp"
       fs.delete dir
-    fs.delete "pestergen.db"
+    --fs.delete "pestergen.db"
 
   -- server
   server: =>

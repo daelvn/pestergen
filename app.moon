@@ -12,6 +12,9 @@ class App extends lapis.Application
   --   @include "applications.#{app}"
   -- routes
   "/": =>
+    render: "home"
+  "/list/:page": =>
+    @page = tonumber @params.page or 0
     render: "list"
   "/view/:nid": =>
     import Log from require "controllers.logs"
@@ -55,6 +58,12 @@ class App extends lapis.Application
       pesterlog = Log messages, nid, @params.title, @params.next, ("/"..fname), @params.panel["content-type"], @params.nextid, (@params.islog and 1 or 0)
       @html ->
         div id: "container", ->
-          h1 "Your page ID is:"
-          a href:"/view/#{pesterlog.nid}", pesterlog.nid
+          div style: "margin: 50px;", class: "card teal accent-3", ->
+            div class: "card-content black-text", ->
+              span class: "card-title", -> "Page created"
+              p "Your page ID is: #{pesterlog.nid}"
+            div class: "card-action", ->
+              a class: "btn", href: "/view/#{pesterlog.nid}", "View"
+              a class: "btn", href: "/create",                "Create"
+              a class: "btn", href: "/list/1",                "See all"
   }

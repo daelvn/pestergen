@@ -70,4 +70,10 @@ class Log
 -- list all logs
 listLogs = -> (grasp.squery database) sql -> select "*", -> From "logs"
 
-{ :Log, :listLogs }
+-- gets a log page
+pageLogs = (pagen, pagesize) -> (grasp.squery database) "SELECT * FROM 'logs' LIMIT #{pagesize} OFFSET #{pagen*pagesize}"
+
+-- count logs
+countLogs = -> ((grasp.squery database) "select Count(*) from logs;")[1]["Count(*)"]
+
+{ :Log, :listLogs, :countLogs, :pageLogs }

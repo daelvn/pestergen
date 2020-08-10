@@ -60,12 +60,12 @@ $(document).ready(function() {
                   div class: "pad-l-lg--md mar-b-md type-hs-small type-hs-bottom--md type-center type-left--md", ->
                     ul class: "o_game-nav", ->
                       li class: "o_game-nav-item", -> a href: "/create", "Create New"
-                      li class: "o_game-nav-item", -> a href: "/",   "View All"
+                      li class: "o_game-nav-item", -> a href: "/list/1", "View All"
         -- site footer
         div class: "o_site-footer row pos-r pad-t-rg pad-b-xl pad-b-0--md bg-dark-gray", ->
           div class: "type-center pad-t-md--md", ->
             div class: "float-l",                    -> img src: "https://homestuck.com/assets/footer_logo-a913b68f0efbaed8da48bc0a4f22b35d369f40d0e4db132013acbe6f26b3e37f.gif"
             div class: "float-r disp-n disp-bl--sm", -> img src: "https://homestuck.com/assets/footer_logo-a913b68f0efbaed8da48bc0a4f22b35d369f40d0e4db132013acbe6f26b3e37f.gif"
             ul ->
-              li -> a href: "#", "Homepage"
+              li -> a href: "/", "Homepage"
             div -> span "made by daelvn. kindly hosted by ahti.space."
