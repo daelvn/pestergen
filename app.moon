@@ -20,7 +20,7 @@ class App extends lapis.Application
     render: "list"
   "/view/:nid": =>
     import Log from require "controllers.logs"
-    pesterlog = Log @params.nid
+    pesterlog = Log nid: @params.nid
     --
     @nid    = pesterlog.nid
     @title  = pesterlog.title
@@ -29,7 +29,6 @@ class App extends lapis.Application
     @type   = pesterlog.type
     @nextid = pesterlog.nextid
     @log    = pesterlog.islog == "on"
-    log inspect @next
     -- render
     render: "view", layout: "homestuck"
   "/create": respond_to {
@@ -43,13 +42,16 @@ class App extends lapis.Application
       -- title                 (panel title)
       -- next                  (text for next link)
       -- nextid                (next nid)
+      --
       -- messages to table
       messages = from_json @params.messages
+      -- check whether there is a panel or not
+      hasPanel = @params.panel.content != ""
       -- this nid
       nid = nanoid 10
       -- save panel, if exists
       local fname
-      if @params.panel
+      if hasPanel
         path  = "static/panels/#{nid}"
         fname = "#{path}/#{@params.panel.filename}"
         fs.makeDir path --unless fs.exists path
@@ -58,7 +60,21 @@ class App extends lapis.Application
           \close!
       -- save log
       import Log from require "controllers.logs"
-      pesterlog = Log messages, nid, @params.title, @params.next, ("/"..fname), @params.panel["content-type"], @params.nextid, (if @params.islog == "on" then 1 else 0)
+      -- create log
+      pesterlog = Log {
+        :nid
+        -- content
+        content: messages
+        title:   @params.title
+        islog:   if @params.islog == "on" then 1 else 0
+        -- next
+        next:    @params.next
+        nextid:  @params.nextid
+        -- panel
+        panel:   if hasPanel then ("/" .. fname)                else nil
+        type:    if hasPanel then @params.panel["content-type"] else nil
+      }
+      -- render created page
       @html ->
         div id: "container", ->
           div style: "margin: 50px;", class: "card teal accent-3", ->

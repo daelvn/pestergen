@@ -19,45 +19,36 @@ class Log
 
   -- takes the parsed log content, saves it into a file, stores the location and nid
   -- alternatively, takes a nid, and loads it from a file
-  new: (content, thisnid, title, next_, panel, type_, nnid, islog) =>
-    expect 1, content, {"string", "table"}
-    -- create a new log
-    if "table" == type content
-      nid       = thisnid or nanoid 10
-      @location = "static/logs/#{nid}.lua"
+  new: (this) =>
+    expect 1, this, {"table"}
+    -- create new
+    if this.content
+      -- set params
+      @[k] = v for k, v in pairs this
+      @nid      or= nanoid 10
+      @location or= "static/logs/#{@nid}.lua"
+      -- save messages
       with io.open @location, "w"
-        \write dumpTable content
+        \write dumpTable this.content
         \close!
-      ok = @.update sql -> insert into "logs", -> values:
-        :nid, :title, next: next_, :panel, type: type_, nextid: nnid, islog: (islog and 1 or 0)
+      -- insert log
+      pairs = pairs
+      ok = @.update sql -> insert into "logs", -> values: {k, v for k, v in pairs this when k != "content"}
       return @.lastError! unless ok
       --
-      @nid     = nid
-      @content = content
-      @title   = title
-      @next    = next_
-      @panel   = panel
-      @type    = type_
-      @nextid  = nnid
-      @islog   = islog
+      return this
     -- get log
     else
-      nid  = content
-      this = @.squery sql -> select "*", ->
+      nid = this.nid
+      qry = @.squery sql -> select "*", ->
         From "logs"
         where :nid
-      error "Log not found" unless "table" == typeof this
+      error "Log not found" unless "table" == typeof qry
       --
-      this      = first this
+      @[k] = v for k, v in pairs first qry
       @nid      = nid
       @location = "static/logs/#{@nid}.lua"
       @content  = loadfile @location
-      @title    = this.title
-      @next     = this.next
-      @panel    = this.panel
-      @type     = this.type
-      @nextid   = this.nextid
-      @islog    = this.islog
 
   -- deletes a log
   delete: =>
