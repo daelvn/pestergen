@@ -39,7 +39,7 @@ class Index extends Widget
               -- title, next and such
               div class: "input-field", ->
                 label for: "panel-title", "Title"
-                input type: "text", name: "title", id: "panel-title"
+                input type: "text", name: "title", id: "panel-title", required: "true"
               div class: "input-field", ->
                 label for: "panel-next", "Next page"
                 input type: "text", name: "next", id: "panel-next"
