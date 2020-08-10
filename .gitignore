@@ -1,6 +1,6 @@
 node_modules
 logs
-panels
+!static/logs
 .alfons
 *.db
 *.db.*
