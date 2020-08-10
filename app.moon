@@ -13,6 +13,8 @@ class App extends lapis.Application
   -- routes
   "/": =>
     render: "home"
+  "/list": =>
+    redirect_to: "/list/0"
   "/list/:page": =>
     @page = tonumber @params.page or 0
     render: "list"
