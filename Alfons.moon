@@ -29,6 +29,10 @@ tasks:
         fs.delete file
     for dir in wildcard "*_temp"
       fs.delete dir
+    for dir in wildcard "static/panels/*"
+      continue if dir\match "homepage"
+      continue if dir\match "%.dnd"
+      fs.delete dir
     --fs.delete "pestergen.db"
 
   -- server
