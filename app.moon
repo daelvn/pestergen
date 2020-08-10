@@ -24,11 +24,12 @@ class App extends lapis.Application
     --
     @nid    = pesterlog.nid
     @title  = pesterlog.title
-    @next   = pesterlog.next
+    @next   = (if pesterlog.next == "" then false else pesterlog.next)
     @panel  = pesterlog.panel
     @type   = pesterlog.type
     @nextid = pesterlog.nextid
     @log    = pesterlog.islog == "on"
+    log inspect @next
     -- render
     render: "view", layout: "homestuck"
   "/create": respond_to {
@@ -44,7 +45,6 @@ class App extends lapis.Application
       -- nextid                (next nid)
       -- messages to table
       messages = from_json @params.messages
-      log inspect @params
       -- this nid
       nid = nanoid 10
       -- save panel, if exists

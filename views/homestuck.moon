@@ -52,8 +52,9 @@ $(document).ready(function() {
               -- nav
               div class: "o_story-nav type-hs-copy line-tight pad-x-0 pad-x-lg--md mar-b-lg", ->
                 div ->
-                  span class: "", ">"
-                  @content_for "page-next"
+                  if @next
+                    span class: "", ">"
+                    @content_for "page-next"
               -- gamenav
               footer id: "story-footer", role: "banner", ->
                 div id: "story_footer_container", class: "o_story-page-footer flex pad-t-0 pad-x-0 flex-justify", ->
