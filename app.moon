@@ -28,7 +28,7 @@ class App extends lapis.Application
     @panel  = pesterlog.panel
     @type   = pesterlog.type
     @nextid = pesterlog.nextid
-    @log    = pesterlog.islog == 1
+    @log    = pesterlog.islog == "on"
     -- render
     render: "view", layout: "homestuck"
   "/create": respond_to {
@@ -44,6 +44,7 @@ class App extends lapis.Application
       -- nextid                (next nid)
       -- messages to table
       messages = from_json @params.messages
+      log inspect @params
       -- this nid
       nid = nanoid 10
       -- save panel, if exists
@@ -57,7 +58,7 @@ class App extends lapis.Application
           \close!
       -- save log
       import Log from require "controllers.logs"
-      pesterlog = Log messages, nid, @params.title, @params.next, ("/"..fname), @params.panel["content-type"], @params.nextid, (@params.islog and 1 or 0)
+      pesterlog = Log messages, nid, @params.title, @params.next, ("/"..fname), @params.panel["content-type"], @params.nextid, (if @params.islog == "on" then 1 else 0)
       @html ->
         div id: "container", ->
           div style: "margin: 50px;", class: "card teal accent-3", ->

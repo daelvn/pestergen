@@ -49,7 +49,7 @@ class Index extends Widget
               -- log or paragraph
               label ->
                 input type: "checkbox", name: "islog"
-                span "Log?"
+                span "Is this a log?"
                 br!
                 br!
               -- submit
