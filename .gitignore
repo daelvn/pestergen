@@ -1,6 +1,10 @@
 node_modules
 logs
-!static/logs
+!static/logs/.dnd
+!static/logs/.dnd
+static/logs/
+static/panels
 .alfons
 *.db
 *.db.*
+*.lua
