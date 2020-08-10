@@ -56,5 +56,5 @@ class App extends lapis.Application
       @html ->
         div id: "container", ->
           h1 "Your page ID is:"
-          h3 pesterlog.nid
+          a href:"/view/#{pesterlog.nid}", pesterlog.nid
   }
