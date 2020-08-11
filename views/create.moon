@@ -1,4 +1,5 @@
 import Widget from require "lapis.html"
+util = require "lapis.util"
 
 class Index extends Widget
   content: =>
@@ -39,7 +40,10 @@ class Index extends Widget
               -- title, next and such
               div class: "input-field", ->
                 label for: "panel-title", "Title"
-                input type: "text", name: "title", id: "panel-title", required: "true"
+                if @next
+                  input type: "text", name: "title", id: "panel-title", required: "true", value: util.unescape @next
+                else
+                  input type: "text", name: "title", id: "panel-title", required: "true"
               div class: "input-field", ->
                 label for: "panel-next", "Next page"
                 input type: "text", name: "next", id: "panel-next"

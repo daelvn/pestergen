@@ -26,7 +26,7 @@ class App extends lapis.Application
     --
     @nid    = pesterlog.nid
     @title  = pesterlog.title
-    @next   = (if pesterlog.next == "" then false else pesterlog.next)
+    @next   = (if pesterlog.next == "" then nil else pesterlog.next)
     @panel  = pesterlog.panel
     @type   = pesterlog.type
     @nextid = pesterlog.nextid
@@ -89,8 +89,9 @@ class App extends lapis.Application
               a class: "btn", href: "/list/1",                "See all"
   }
 
-  "/connect/:before_nid": respond_to {
+  "/connect/:before_nid/:before_next_id": respond_to {
     GET: =>
+      @next = @params.before_next_id
       return render: "create"
     POST: =>
       import Log from require "controllers.logs"
