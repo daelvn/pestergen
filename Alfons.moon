@@ -33,7 +33,7 @@ tasks:
       continue if dir\match "homepage"
       continue if dir\match "%.dnd"
       fs.delete dir
-    --fs.delete "pestergen.db"
+    fs.delete "pestergen.db"
 
   -- server
   server: =>
