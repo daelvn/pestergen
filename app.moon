@@ -28,7 +28,7 @@ class App extends lapis.Application
     @panel  = pesterlog.panel
     @type   = pesterlog.type
     @nextid = pesterlog.nextid
-    @log    = pesterlog.islog == "on"
+    @log    = pesterlog.islog == 1
     -- render
     render: "view", layout: "homestuck"
   "/create": respond_to {
