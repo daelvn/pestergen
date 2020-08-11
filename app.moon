@@ -1,6 +1,8 @@
 import config     from require "pestergen.config"
 import respond_to from require "lapis.application"
 import from_json  from require "lapis.util"
+import database   from require "pestergen.db.init"
+import query, update from require "grasp"
 lapis                = require "lapis"
 nanoid               = require "nanoid"
 
@@ -74,6 +76,65 @@ class App extends lapis.Application
         panel:   if hasPanel then ("/" .. fname)                else nil
         type:    if hasPanel then @params.panel["content-type"] else nil
       }
+      -- render created page
+      @html ->
+        div id: "container", ->
+          div style: "margin: 50px;", class: "card teal accent-3", ->
+            div class: "card-content black-text", ->
+              span class: "card-title", -> "Page created"
+              p "Your page ID is: #{pesterlog.nid}"
+            div class: "card-action", ->
+              a class: "btn", href: "/view/#{pesterlog.nid}", "View"
+              a class: "btn", href: "/create",                "Create"
+              a class: "btn", href: "/list/1",                "See all"
+  }
+
+  "/connect/:before_nid": respond_to {
+    GET: =>
+      return render: "create"
+    POST: =>
+      import Log from require "controllers.logs"
+      before_message = @params.before_nid
+      -- messages              (as json)
+      -- panel.content         (panel image data)
+      -- panel.filename        (panel image filename)
+      -- panel["content-type"] (panel image content type)
+      -- title                 (panel title)
+      -- next                  (text for next link)
+      -- nextid                (next nid)
+      --
+      -- messages to table
+      messages = from_json @params.messages
+      -- check whether there is a panel or not
+      hasPanel = @params.panel.content != ""
+      -- this nid
+      nid = nanoid 10
+      -- save panel, if exists
+      local fname
+      if hasPanel
+        path  = "static/panels/#{nid}"
+        fname = "#{path}/#{@params.panel.filename}"
+        fs.makeDir path --unless fs.exists path
+        with io.open fname, "w"
+          \write @params.panel.content
+          \close!
+      -- create log
+      pesterlog = Log {
+        :nid
+        -- content
+        content: messages
+        title:   @params.title
+        islog:   if @params.islog == "on" then 1 else 0
+        -- next
+        next:    @params.next
+        nextid:  @params.nextid
+        -- panel
+        panel:   if hasPanel then ("/" .. fname)                else nil
+        type:    if hasPanel then @params.panel["content-type"] else nil
+      }
+      -- connect previous page to this page
+
+      log (update database) [[update "logs" set nextid=?1 where nid=?2]], {nid, before_message}
       -- render created page
       @html ->
         div id: "container", ->
