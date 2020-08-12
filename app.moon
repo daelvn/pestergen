@@ -144,6 +144,7 @@ class App extends lapis.Application
               p "Your page ID is: #{pesterlog.nid}"
             div class: "card-action", ->
               a class: "btn", href: "/view/#{pesterlog.nid}", "View"
+              a class: "btn", href: "/view/#{before_message}", "View Previous"
               a class: "btn", href: "/create",                "Create"
               a class: "btn", href: "/list/1",                "See all"
   }

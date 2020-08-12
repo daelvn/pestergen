@@ -12,4 +12,9 @@ https://github.com/daelvn/pestergen]]},
 ]]},
 {color="#000000",message=[[    
 Click "Create New" to create a new panel.
+]]},
+{color="#000000",message=[[ 
+Click "Make Next Page" to create the next panel that connects to this one."
+]]},
+{color="#000000",message=[[ 
 Click "View All" to get a list of all uploaded panels.]]}};return _;end
