@@ -35,6 +35,7 @@ class App extends lapis.Application
     render: "view", layout: "homestuck"
   "/create": respond_to {
     GET: =>
+      @show_nextb = false
       return render: "create"
     POST: =>
       -- messages              (as json)
@@ -89,9 +90,10 @@ class App extends lapis.Application
               a class: "btn", href: "/list/1",                "See all"
   }
 
-  "/connect/:before_nid/:before_next_id": respond_to {
+  "/connect/:before_nid": respond_to {
     GET: =>
       @next = @params.before_next_id
+      @show_nextb = true
       return render: "create"
     POST: =>
       import Log from require "controllers.logs"
@@ -126,16 +128,13 @@ class App extends lapis.Application
         content: messages
         title:   @params.title
         islog:   if @params.islog == "on" then 1 else 0
-        -- next
-        next:    @params.next
-        nextid:  @params.nextid
         -- panel
         panel:   if hasPanel then ("/" .. fname)                else nil
         type:    if hasPanel then @params.panel["content-type"] else nil
       }
       -- connect previous page to this page
 
-      log (update database) [[update "logs" set nextid=?1 where nid=?2]], {nid, before_message}
+      log (update database) [[update "logs" set nextid=?1, next=?2 where nid=?3]], {nid, @params.title, before_message}
       -- render created page
       @html ->
         div id: "container", ->

@@ -38,18 +38,10 @@ class Index extends Widget
               -- messages as json
               input type: "hidden", id: "messages", name: "messages"
               -- title, next and such
+              
               div class: "input-field", ->
                 label for: "panel-title", "Title"
-                if @next
-                  input type: "text", name: "title", id: "panel-title", required: "true", value: util.unescape @next
-                else
-                  input type: "text", name: "title", id: "panel-title", required: "true"
-              div class: "input-field", ->
-                label for: "panel-next", "Next page"
-                input type: "text", name: "next", id: "panel-next"
-              div class: "input-field", ->
-                label for: "panel-next-nid", "Next page (ID)"
-                input type: "text", name: "nextid", id: "panel-next-id"
+                input type: "text", name: "title", id: "panel-title", required: "true"
               -- log or paragraph
               label ->
                 input type: "checkbox", name: "islog"
