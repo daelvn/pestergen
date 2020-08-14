@@ -9,4 +9,3 @@ static/panels/*
 !static/logs/homepage.lua
 !*.dnd
 .alfons
-*.conf.compiled
