@@ -58,9 +58,10 @@ class App extends lapis.Application
         path  = "static/panels/#{nid}"
         fname = "#{path}/#{@params.panel.filename}"
         fs.makeDir path --unless fs.exists path
-        with io.open fname, "w"
-          \write @params.panel.content
-          \close!
+        br, err = io.open fname, "w"
+        log err
+        br\write @params.panel.content
+        br\close!
       -- save log
       import Log from require "controllers.logs"
       -- create log
@@ -118,9 +119,10 @@ class App extends lapis.Application
         path  = "static/panels/#{nid}"
         fname = "#{path}/#{@params.panel.filename}"
         fs.makeDir path --unless fs.exists path
-        with io.open fname, "w"
-          \write @params.panel.content
-          \close!
+        br, err = io.open fname, "w"
+        log err
+        br\write @params.panel.content
+        br\close!
       -- create log
       pesterlog = Log {
         :nid
