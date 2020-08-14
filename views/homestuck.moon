@@ -41,14 +41,7 @@ $(document).ready(function() {
           -- log/content
           div class: "row bg-hs-gray bg-light-gray--md pad-b-md pad-b-lg--md pos-r", ->
             div class: "mar-x-auto disp-bl bg-hs-gray pad-t-lg", style: "max-width: 650px;", ->
-              if @log
-                div class: "type-center mar-x-0 mar-x-hs-md--md mar-b-hs-lg o_chat-container", ->
-                  button class: "o_chat-log-btn", "Hide Dialoglog"
-                  p class: "o_chat-log type-left type-rg type-hs-small--md line-caption line-copy--md mar-t-md mar-t-md--md pad-x-md pad-x-hs-lg--md pad-b-md pad-b-md--md", ->
-                    @content_for "page-content"
-              else
-                p class: "o-story_text type-rg type-hs-small--md type-center line-caption line-copy--md pad-x-0 pad-x-lg--md pad-b-lg", ->
-                  @content_for "page-content"
+              @content_for "page-content"
               -- nav
               div class: "o_story-nav type-hs-copy line-tight pad-x-0 pad-x-lg--md mar-b-lg", ->
                 div ->

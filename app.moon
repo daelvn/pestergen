@@ -43,8 +43,9 @@ class App extends lapis.Application
       -- next                  (text for next link)
       -- nextid                (next nid)
       --
-      -- messages to table
-      messages = from_json @params.messages
+      -- content to table
+      content = from_json @params.content
+      log inspect content
       -- check whether there is a panel or not
       hasPanel = @params.panel.content != ""
       -- this nid
@@ -64,7 +65,7 @@ class App extends lapis.Application
       pesterlog = Log {
         :nid
         -- content
-        content: messages
+        :content
         title:   @params.title
         islog:   if @params.islog == "on" then 1 else 0
         -- next

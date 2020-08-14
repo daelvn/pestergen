@@ -11,6 +11,25 @@ first = (t) ->
 
 unbool = (num) -> num == 1
 
+groupLog = (stream) ->
+  grouped = {}
+  current = {}
+  for object in *stream
+    print current.kind, object.kind
+    if current.kind
+      if object.kind == current.kind
+        table.insert current, object
+      else
+        table.insert grouped, current
+        current = {}
+        current.kind = object.kind
+        table.insert current, object
+    else
+      current.kind = object.kind
+      table.insert current, object
+  table.insert grouped, current
+  return grouped
+
 class Log
   squery:    grasp.squery   database
   update:    grasp.update   database
@@ -29,7 +48,7 @@ class Log
       @location or= "static/logs/#{@nid}.lua"
       -- save messages
       with io.open @location, "w"
-        \write dumpTable this.content
+        \write dumpTable groupLog this.content
         \close!
       -- insert log
       pairs = pairs

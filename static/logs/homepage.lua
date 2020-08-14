@@ -1,15 +1,1 @@
-do local _={{color="#000000",message=[[Pestergen is a Homestuck page generator and host that supports uploading images, GIFs, and color logs. It uses the Homestuck style sheets so that it looks as close as possible to the original.]]}, 
-{color="#000000",message=[[    
-
-
-  ]]},
-{color="#000000",message=[[
-Made by kankri and zuup.
-https://github.com/daelvn/pestergen]]},
-{color="#000000",message=[[    
-
-
-]]},
-{color="#000000",message=[[    
-Click "Create New" to create a new panel.
-Click "View All" to get a list of all uploaded panels.]]}};return _;end
+do local _={{[1]={kind="paragraph",color="#000000",text="Pestergen is a Homestuck page generator and host that supports uploading images, GIFs, and color logs. It uses the Homestuck style sheets so that it looks as close as possible to the original."},kind="paragraph"},{[1]={kind="noop"},kind="noop"},{[1]={kind="paragraph",color="#000000",text="Made by kankri and zuup."},[2]={kind="paragraph",color="#000000",text="https://github.com/daelvn/pestergen"},kind="paragraph"},{[1]={kind="noop"},kind="noop"},{[1]={kind="paragraph",color="#000000",text="Click \"Create New\" to create a new panel."},[2]={kind="paragraph",color="#000000",text="Click \"View All\" to get a list of all uploaded panels."},kind="paragraph"}};return _;end
