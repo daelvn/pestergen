@@ -35,7 +35,6 @@ class App extends lapis.Application
     render: "view", layout: "homestuck"
   "/create": respond_to {
     GET: =>
-      @show_nextb = false
       return render: "create"
     POST: =>
       -- messages              (as json)
@@ -48,7 +47,6 @@ class App extends lapis.Application
       --
       -- content to table
       content = from_json @params.content
-      log inspect content
       -- check whether there is a panel or not
       hasPanel = @params.panel.content != ""
       -- this nid
@@ -59,10 +57,9 @@ class App extends lapis.Application
         path  = "static/panels/#{nid}"
         fname = "#{path}/#{@params.panel.filename}"
         fs.makeDir path --unless fs.exists path
-        fl, err = io.open fname, "w"
-        log err
-        fl\write @params.panel.content
-        fl\close!
+        with io.open fname, "w"
+          \write @params.panel.content
+          \close!
       -- save log
       import Log from require "controllers.logs"
       -- create log
