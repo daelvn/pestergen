@@ -54,7 +54,6 @@ $(document).ready(function() {
                   div class: "pad-l-lg--md mar-b-md type-hs-small type-hs-bottom--md type-center type-left--md", ->
                     ul class: "o_game-nav", ->
                       li class: "o_game-nav-item", -> a href: "/create", "Create New"
-                      li class: "o_game-nav-item", -> a href: "/connect/#{@nid}", "Make Next Page"
                       li class: "o_game-nav-item", -> a href: "/list/1", "View All"
         -- site footer
         div class: "o_site-footer row pos-r pad-t-rg pad-b-xl pad-b-0--md bg-dark-gray", ->
