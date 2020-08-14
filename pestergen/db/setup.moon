@@ -27,7 +27,6 @@ statements = {
     panel:  "TEXT"
     type:   "TEXT"
     nextid: "TEXT"
-    islog:  "INTEGER"
   
   sql -> 
     replace into "logs", -> 
@@ -38,7 +37,6 @@ statements = {
         panel:  "/static/panels/homepage/homegif.gif"
         type:   "image/gif"
         nextid: ""
-        islog:  0
 }
 
 for statement in *statements

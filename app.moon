@@ -30,7 +30,6 @@ class App extends lapis.Application
     @panel  = pesterlog.panel
     @type   = pesterlog.type
     @nextid = pesterlog.nextid
-    @log    = pesterlog.islog == 1
     -- render
     render: "view", layout: "homestuck"
   "/create": respond_to {
@@ -68,7 +67,6 @@ class App extends lapis.Application
         -- content
         :content
         title:   @params.title
-        islog:   if @params.islog == "on" then 1 else 0
         -- next
         next:    @params.next
         nextid:  @params.nextid

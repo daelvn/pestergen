@@ -85,12 +85,6 @@ class Index extends Widget
                   input form: "page-form", type: "text", name: "nextid", id: "panel-next-id", class: "autocomplete"
                 -- add a line break
                 button class: "btn waves-effect waves-light", id: "newline-add", "Add line break"
-                -- -- check whether this is a log or not
-                -- label ->
-                --   input type: "checkbox", name: "islog"
-                --   span "Is this a log?"
-                --   br!
-                --   br!
           -- buttons
           form id: "page-form", action: "", method: "POST", enctype: "multipart/form-data", ->
             input type: "hidden", id: "json-content", name: "content"
