@@ -1,4 +1,5 @@
 import Widget from require "lapis.html"
+util = require "lapis.util"
 
 class Index extends Widget
   content: =>
